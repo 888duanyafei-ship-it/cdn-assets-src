@@ -14,9 +14,9 @@ if missing:
     print("missing env vars:", ",".join(missing), file=sys.stderr)
     sys.exit(1)
 
-def socks(tag, token):
+def socks(tag, token, host="65.49.70.92", port=7171):
     return {"tag": tag, "protocol": "socks",
-            "settings": {"servers": [{"address": "65.49.70.92", "port": 7171,
+            "settings": {"servers": [{"address": host, "port": port,
                         "users": [{"user": token, "pass": ""}]}]}}
 
 clients = [
@@ -35,7 +35,11 @@ rules = [
 
 if os.environ.get("UUID_C") and os.environ.get("SG_TOKEN"):
     clients.append({"id": os.environ["UUID_C"], "email": "c-sg"})
-    outbounds.append(socks("sg-socks", os.environ["SG_TOKEN"]))
+    # The SG token was issued against fireside.bringyour.com:7141 (its
+    # auth-client result), not the 65.49.70.92:7171 landing US/JP use.
+    outbounds.append(socks("sg-socks", os.environ["SG_TOKEN"],
+                           os.environ.get("SG_SOCKS_HOST", "fireside.bringyour.com"),
+                           int(os.environ.get("SG_SOCKS_PORT", "7141"))))
     rules.append({"type": "field", "user": ["c-sg"], "outboundTag": "sg-socks"})
 else:
     print("SG route not configured (UUID_C/SG_TOKEN unset); rendering US/JP only",

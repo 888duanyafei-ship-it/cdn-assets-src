@@ -11,10 +11,10 @@ PORT = int(os.environ.get("SOCKS_PORT", "7171"))
 _cache = {"ts": 0, "data": None}
 _lock = threading.Lock()
 
-def check(token):
+def check(token, host=None, port=None):
     out = {"tcp": False, "auth": False, "exit_ip": None, "error": None}
     try:
-        s = socket.create_connection((HOST, PORT), timeout=10)
+        s = socket.create_connection((host or HOST, port or PORT), timeout=10)
         out["tcp"] = True
         s.sendall(b"\x05\x01\x02")
         r = s.recv(2)
@@ -61,7 +61,9 @@ def run_all():
     data = {"us": check(os.environ.get("US_TOKEN", "")),
             "jp": check(os.environ.get("JP_TOKEN", ""))}
     if os.environ.get("SG_TOKEN"):
-        data["sg"] = check(os.environ["SG_TOKEN"])
+        data["sg"] = check(os.environ["SG_TOKEN"],
+                           os.environ.get("SG_SOCKS_HOST", "fireside.bringyour.com"),
+                           int(os.environ.get("SG_SOCKS_PORT", "7141")))
     return data
 
 class H(BaseHTTPRequestHandler):
