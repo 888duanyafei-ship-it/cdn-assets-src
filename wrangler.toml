@@ -1,3 +1,4 @@
 name = "cdn-assets"
 main = "_worker.js"
 compatibility_date = "2025-01-01"
+#  触发 Cloudflare 首次构建
