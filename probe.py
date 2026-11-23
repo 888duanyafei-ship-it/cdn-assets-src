@@ -58,8 +58,11 @@ def check(token):
     return out
 
 def run_all():
-    return {"us": check(os.environ.get("US_TOKEN", "")),
+    data = {"us": check(os.environ.get("US_TOKEN", "")),
             "jp": check(os.environ.get("JP_TOKEN", ""))}
+    if os.environ.get("SG_TOKEN"):
+        data["sg"] = check(os.environ["SG_TOKEN"])
+    return data
 
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
