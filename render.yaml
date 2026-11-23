@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: xray-node
+    runtime: docker
+    plan: free
+    envVars:
+      - key: UUID_A
+        sync: false
+      - key: UUID_B
+        sync: false
+      - key: WS_PATH
+        sync: false
+      - key: PROBE_PATH
+        sync: false
+      - key: US_TOKEN
+        sync: false
+      - key: JP_TOKEN
+        sync: false
