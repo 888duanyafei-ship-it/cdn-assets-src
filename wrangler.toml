@@ -13,3 +13,6 @@ SOCKS_PORT = "7171"
 [[kv_namespaces]]
 binding = "KV"
 id = "59a4c534bb5540808dadbb7796d7c276"
+
+[observability]
+enabled = true
