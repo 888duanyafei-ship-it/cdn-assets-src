@@ -1,6 +1,13 @@
 name = "cdn-lab-01"
-main = "_worker.js"
+main = "worker.js"
 compatibility_date = "2025-01-01"
 
 [observability]
 enabled = true
+
+[vars]
+SOCKS_HOST = "65.49.70.92"
+SOCKS_PORT = "7171"
+UUID = "89376535-6411-4725-83ff-45dce173dd77"
+PATH_US = "/us-d578aa696042"
+PATH_JP = "/jp-337b94a689d1"
