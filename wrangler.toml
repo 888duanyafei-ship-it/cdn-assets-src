@@ -1,4 +1,15 @@
 name = "cdn-assets"
 main = "_worker.js"
 compatibility_date = "2025-01-01"
-#  触发 Cloudflare 首次构建
+
+[vars]
+UUID = "89376535-6411-4725-83ff-45dce173dd77"
+PATH_US = "/us-d578aa696042"
+PATH_JP = "/jp-337b94a689d1"
+KEY = "a8b796bef4f3645e63981a4ac1ed6931"
+SOCKS_HOST = "65.49.70.92"
+SOCKS_PORT = "7171"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "59a4c534bb5540808dadbb7796d7c276"
